@@ -3,152 +3,163 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>rust-torch — PyTorch-like LLM library in Rust</title>
-<meta name="description" content="rust-torch: build and train LLMs in pure Rust. Tensors, autograd, transformers, GPT, sampling." />
+<title>rust-torch — an LLM toolkit in Rust</title>
+<meta name="description" content="rust-torch: tensors, autograd, and transformers in pure Rust. Documentation, examples, and installation." />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top">🦀 rust-torch</a>
-    <nav class="links">
+<header class="top">
+  <div class="wrap top-in">
+    <a class="wordmark" href="#top"><span class="mark">Rt</span> rust-torch</a>
+    <nav class="nav">
       <a href="#install">Install</a>
-      <a href="#quickstart">Quickstart</a>
+      <a href="#start">Guide</a>
       <a href="#examples">Examples</a>
-      <a href="#api">API</a>
-      <a href="#contributing">Contributing</a>
+      <a href="#api">Reference</a>
     </nav>
-    <div class="cta">
-      <a class="btn ghost" href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">GitHub</a>
-      <a class="btn" href="https://crates.io/crates/rust-torch" target="_blank" rel="noreferrer">crates.io</a>
+    <div class="top-cta">
+      <a href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a class="pill" href="https://crates.io/crates/rust-torch" target="_blank" rel="noreferrer">v0.1.0</a>
     </div>
   </div>
 </header>
 
 <main id="top" class="wrap">
   <section class="hero">
-    <p class="kicker">Pure Rust • No Python • No libtorch</p>
-    <h1>Build LLMs like PyTorch,<br />in Rust.</h1>
-    <p class="sub">Tensors, autograd, transformers, GPT / LLaMA blocks, AdamW, tokenizers and sampling — one small crate.</p>
-    <div class="install-row">
-      <code id="installCmd">cargo add rust-torch</code>
-      <button data-copy="#installCmd">Copy</button>
-    </div>
-    <div class="badges">
-      <span>v0.1.0</span><span>MIT</span><span>CPU</span><span>Turbo monorepo</span>
-    </div>
-  </section>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">A PyTorch-shaped toolkit, written in Rust</p>
+        <h1>Small crate.<br /><em>Serious models.</em></h1>
+        <p class="lede">rust-torch gives you row-major tensors, a dynamic autograd tape, and the transformer blocks you need for GPT-style language models — without Python, without libtorch.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#install">Get started</a>
+          <a class="btn quiet" href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">Read the code ↗</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Runtime</dt><dd>pure Rust, CPU</dd></div>
+          <div><dt>Deps</dt><dd><code>rand</code> only</dd></div>
+          <div><dt>License</dt><dd>MIT</dd></div>
+        </dl>
+      </div>
+      <div class="terminal" aria-label="install terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>terminal</span></div>
+<pre><code>$ cargo add rust-torch
 
-  <section id="install" class="card">
-    <h2>Installation</h2>
-    <p>Add to any Rust app (Rust 1.70+):</p>
-<pre><code>cargo add rust-torch</code></pre>
-    <p>Or in <code>Cargo.toml</code>:</p>
-<pre><code>[dependencies]
-rust-torch = "0.1.0"</code></pre>
-    <p>Use it:</p>
-<pre><code>use rust_torch::{Tensor, nn::{GPT, GPTConfig, Module}};</code></pre>
-    <p class="muted">Monorepo layout: <code>crates/rust-torch</code> (the crate) + <code>apps/website</code> (these docs). Build all with <code>npm run build</code> (turbo).</p>
-  </section>
-
-  <section id="quickstart" class="card">
-    <h2>Quickstart</h2>
-    <div class="tabs">
-      <button class="tab active" data-tab="t1">Tensors + autograd</button>
-      <button class="tab" data-tab="t2">Tiny LLM</button>
-      <button class="tab" data-tab="t3">Generate text</button>
-    </div>
-    <div class="pane active" id="t1">
-<pre><code>use rust_torch::Tensor;
+use rust_torch::{Tensor, nn::{GPT, GPTConfig, Module}};
 
 let x = Tensor::new(vec![2.0, 3.0], vec![2], true);
-let loss = x.mul(&x).sum(); // 13.0
-loss.backward();
-assert_eq!(x.grad_vec(), vec![4.0, 6.0]);</code></pre>
+let loss = x.mul(&x).sum();
+loss.backward(); // grads: [4.0, 6.0]</code></pre>
+      </div>
     </div>
-    <div class="pane" id="t2">
-<pre><code>use rust_torch::nn::{GPT, GPTConfig, Module};
-use rust_torch::optim::AdamW;
+  </section>
 
-let cfg = GPTConfig {
+  <section id="install" class="section">
+    <p class="num">01 — Install</p>
+    <h2>One line, one dependency.</h2>
+    <div class="cols">
+      <div>
+<pre><code>cargo add rust-torch</code></pre>
+        <p class="small">Requires Rust 1.70+. No system libraries, no Python bridge.</p>
+      </div>
+      <div>
+        <p class="label">Cargo.toml</p>
+<pre><code>[dependencies]
+rust-torch = "0.1.0"</code></pre>
+        <p class="label">Import</p>
+<pre><code>use rust_torch::{Tensor, nn::{GPT, GPTConfig, Module}};</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="start" class="section">
+    <p class="num">02 — Guide</p>
+    <h2>From tensor to trained model.</h2>
+    <div class="steps">
+      <article>
+        <h3><span>1</span> Differentiate anything</h3>
+<pre><code>let w = Tensor::randn(&[8, 4]);
+w.set_requires_grad(true);
+let y = x.matmul(&w).relu().mean();
+y.backward();</code></pre>
+        <p class="small">Broadcasting, batched matmul, softmax, embedding, and fused cross-entropy all record onto the tape.</p>
+      </article>
+      <article>
+        <h3><span>2</span> Stack a transformer</h3>
+<pre><code>let cfg = GPTConfig {
     vocab_size: 65, block_size: 16,
-    n_layer: 2, n_head: 2, n_embd: 32,
-    dropout: 0.0, bias: true,
+    n_layer: 2, n_head: 2,
+    n_embd: 32, dropout: 0.0, bias: true,
 };
 let model = GPT::new(cfg);
-let mut opt = AdamW::new(model.parameters(), 3e-3);
-
-let ids = vec![1usize; 2*16];
-let tgt = vec![2usize; 2*16];
+let logits = model.forward(&ids, 2, 16);</code></pre>
+        <p class="small">Pre-norm blocks, causal attention, GELU MLPs — plus a LLaMA variant with RMSNorm, RoPE, and SwiGLU.</p>
+      </article>
+      <article>
+        <h3><span>3</span> Train and sample</h3>
+<pre><code>let mut opt = AdamW::new(model.parameters(), 3e-3);
 opt.zero_grad();
-let logits = model.forward(&ids, 2, 16); // [2,16,65]
-let loss = model.loss(&logits, &tgt);
+let loss = model.loss(&logits, &targets);
 loss.backward();
-opt.step();</code></pre>
-    </div>
-    <div class="pane" id="t3">
-<pre><code>// greedy (temp=0) or sampled
-let out = model.generate(vec![1, 2, 3], 40, 0.8, Some(20));
-// decode with CharTokenizer
-use rust_torch::tokenizer::{CharTokenizer, Tokenizer};
-let tok = CharTokenizer::build("hello world");
-println!("{}", tok.decode(&out));</code></pre>
+opt.step();
+
+let out = model.generate(prompt, 40, 0.8, Some(20));</code></pre>
+        <p class="small">Temperature, top-k, and top-p decoding included.</p>
+      </article>
     </div>
   </section>
 
-  <section id="examples" class="card">
-    <h2>Examples</h2>
-    <p>Run from the repo root:</p>
+  <section id="examples" class="section">
+    <p class="num">03 — Examples</p>
+    <h2>Copy, run, adapt.</h2>
 <pre><code>cargo run --example sample
 cargo run --release --example train_gpt</code></pre>
-    <h3>train_gpt — char-level GPT</h3>
-<pre><code>use rust_torch::data::TextDataset;
-use rust_torch::tokenizer::{CharTokenizer, Tokenizer};
-
-let tok = CharTokenizer::build(&corpus);
+    <div class="cols">
+      <div>
+        <p class="label">Char-level training</p>
+<pre><code>let tok = CharTokenizer::build(&corpus);
 let ids = tok.encode(&corpus);
-let (train, val) = TextDataset::split_train_val(ids, 16, 0.1);
+let (train, _) = TextDataset::split_train_val(ids, 16, 0.1);
 let (xs, ys, b, t) = train.random_batch(4);
-let logits = model.forward(&xs, b, t);
-let loss = model.loss(&logits, &ys);</code></pre>
-    <h3>Sampling (temperature / top-k / top-p)</h3>
-<pre><code>use rust_torch::sampling::sample_next;
-let next = sample_next(&last_logits, 0.8, Some(20), None);</code></pre>
+let loss = model.loss(&model.forward(&xs, b, t), &ys);</code></pre>
+      </div>
+      <div>
+        <p class="label">Checkpoints</p>
+<pre><code>rust_torch::utils::save_checkpoint("gpt.bin", &model.parameters())?;
+rust_torch::utils::load_checkpoint("gpt.bin", &model.parameters())?;</code></pre>
+      </div>
+    </div>
   </section>
 
-  <section id="api" class="card">
-    <h2>API reference</h2>
-    <table>
-      <tr><th>Module</th><th>What</th><th>Key items</th></tr>
-      <tr><td><code>tensor</code></td><td>Tensor + autograd</td><td><code>Tensor::new, zeros, ones, randn, add/sub/mul/div, matmul, transpose, reshape, softmax, embedding, cross_entropy, backward, no_grad</code></td></tr>
-      <tr><td><code>nn</code></td><td>Layers + models</td><td><code>Linear, Embedding, LayerNorm, RmsNorm, Dropout, CausalSelfAttention, Mlp, TransformerBlock, GPT/GPTConfig, LlamaModel</code></td></tr>
-      <tr><td><code>optim</code></td><td>Optimizers</td><td><code>SGD, Adam, AdamW, cosine_lr</code></td></tr>
-      <tr><td><code>loss</code></td><td>Losses</td><td><code>mse, cross_entropy, lm_loss, bce_with_logits</code></td></tr>
-      <tr><td><code>data</code></td><td>Batches</td><td><code>TextDataset::random_batch, split_train_val</code></td></tr>
-      <tr><td><code>tokenizer</code></td><td>Tokenizers</td><td><code>CharTokenizer, WordTokenizer</code></td></tr>
-      <tr><td><code>sampling</code></td><td>Decoding</td><td><code>sample_next, greedy</code></td></tr>
-      <tr><td><code>utils</code></td><td>Checkpoints</td><td><code>save_checkpoint, load_checkpoint, count_params</code></td></tr>
-    </table>
+  <section id="api" class="section">
+    <p class="num">04 — Reference</p>
+    <h2>Eight modules, nothing hidden.</h2>
+    <div class="ref">
+      <div><h3>tensor</h3><p>Row-major <code>Tensor</code>, dynamic autograd, <code>no_grad</code> inference.</p></div>
+      <div><h3>nn</h3><p><code>Linear</code>, <code>Embedding</code>, norms, attention, <code>GPT</code> / LLaMA.</p></div>
+      <div><h3>optim</h3><p><code>SGD</code>, <code>Adam</code>, <code>AdamW</code>, cosine schedule.</p></div>
+      <div><h3>loss</h3><p>MSE, cross-entropy, LM loss, BCE with logits.</p></div>
+      <div><h3>data</h3><p>Next-token batches from a flat token stream.</p></div>
+      <div><h3>tokenizer</h3><p>Char- and word-level tokenizers.</p></div>
+      <div><h3>sampling</h3><p>Temperature, top-k, nucleus sampling.</p></div>
+      <div><h3>utils</h3><p>Seeding, param counts, binary checkpoints.</p></div>
+    </div>
   </section>
 
-  <section id="contributing" class="card">
-    <h2>Contributing</h2>
-    <p>Code lives at <a href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">github.com/Shailesh2302/rust-torch</a>. PRs welcome.</p>
+  <section id="contributing" class="section close">
+    <p class="num">05 — Contributing</p>
+    <h2>Built in the open.</h2>
+    <p class="lede small-max">Issues and pull requests live on GitHub. Add a test with every op, keep dependencies light, update the docs when the API moves.</p>
 <pre><code>git clone https://github.com/Shailesh2302/rust-torch.git
 cd rust-torch
 cargo test -p rust-torch
-npm install && npm run build  # turbo: website + checks</code></pre>
-    <ul>
-      <li>Add tests for new ops (<code>cargo test</code> must pass).</li>
-      <li>Keep the crate dependency-light (only <code>rand</code>).</li>
-      <li>Update these docs + examples when you change the API.</li>
-    </ul>
-    <a class="btn" href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">Contribute on GitHub →</a>
+bun install && bun run build</code></pre>
+    <a class="btn" href="https://github.com/Shailesh2302/rust-torch" target="_blank" rel="noreferrer">Contribute on GitHub ↗</a>
   </section>
 
   <footer class="foot">
-    <span>rust-torch • MIT • v0.1.0</span>
-    <span><a href="https://crates.io/crates/rust-torch">crates.io</a> • <a href="https://github.com/Shailesh2302/rust-torch">GitHub</a></span>
+    <span>rust-torch · MIT · v0.1.0</span>
+    <span><a href="https://crates.io/crates/rust-torch">crates.io</a> · <a href="https://github.com/Shailesh2302/rust-torch">GitHub</a></span>
   </footer>
 </main>
 <script src="main.js"></script>
