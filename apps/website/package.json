@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "mkdir -p dist && cp index.html styles.css main.js dist/ && echo website > dist/.built",
-    "dev": "bunx serve -s . -l 3000",
+    "dev": "bunx serve -s . -l 4000",
     "lint": "echo lint-ok"
   }
 }
