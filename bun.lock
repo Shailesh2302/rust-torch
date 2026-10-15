@@ -1,0 +1,33 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "rust-torch-turbo",
+      "devDependencies": {
+        "turbo": "^2.5.4",
+      },
+    },
+    "apps/website": {
+      "name": "website",
+      "version": "0.1.0",
+    },
+  },
+  "packages": {
+    "@turbo/darwin-64": ["@turbo/darwin-64@2.11.8", "", { "os": "darwin", "cpu": "x64" }, "sha512-u+6s4C2hskRYx6MkW2uT7BCW6sESCL/+5bjHDDWUfQfQliCSJ7lAHAL6RQaw0an9WU6nJvwYgT786mEWul2kDw=="],
+
+    "@turbo/darwin-arm64": ["@turbo/darwin-arm64@2.11.8", "", { "os": "darwin", "cpu": "arm64" }, "sha512-y3qpPbclA4MuzAf/pSp6ivifp2mBCiLMHyf/bVq2eAJLjTnzev9JG5eqFhM0UvDGi0b3QKRNZi2HiavPnLbEbw=="],
+
+    "@turbo/linux-64": ["@turbo/linux-64@2.11.8", "", { "os": [ "linux", "android", ], "cpu": "x64" }, "sha512-5Pm0icIkXPjk/HxhZD2AFMCyfH8RlITgtOksoSAdeLtXHAagzAqaAkdqG+6Ebd3eGPT1k3nJZWQD4wCLlIte5g=="],
+
+    "@turbo/linux-arm64": ["@turbo/linux-arm64@2.11.8", "", { "os": [ "linux", "android", ], "cpu": "arm64" }, "sha512-gh/Pcg7WVLS22SpoFqNxs/4y6feU/+Qa9nkCLTOHMTLjE3ADeqMjLFulq1LVCsWD2vjQccCnaZSUOLJ/lHzBRQ=="],
+
+    "@turbo/windows-64": ["@turbo/windows-64@2.11.8", "", { "os": "win32", "cpu": "x64" }, "sha512-NnHtcWPE6PymlYsCKEuYditlY/nMeCEB3xyD4yc3cpqpxW7/4Xqdlqd5TpqvEpjS8CDazPHelGCQS/ghUIoZ6g=="],
+
+    "@turbo/windows-arm64": ["@turbo/windows-arm64@2.11.8", "", { "os": "win32", "cpu": "arm64" }, "sha512-o8UyM/VlYCvW5Enfo2O37Pe11p3wmnEYtJrohXA2SyOlehmo5KyXpptPRKrXOMNfdmoYEulo6Nhj0tIv2UB0hA=="],
+
+    "turbo": ["turbo@2.11.8", "", { "optionalDependencies": { "@turbo/darwin-64": "2.11.8", "@turbo/darwin-arm64": "2.11.8", "@turbo/linux-64": "2.11.8", "@turbo/linux-arm64": "2.11.8", "@turbo/windows-64": "2.11.8", "@turbo/windows-arm64": "2.11.8" }, "bin": { "turbo": "bin/turbo" } }, "sha512-OwiFs6xNO5c2XtPgYCgCXuSlkur4b5T/OeAbOKzgsHh5mmJ9Sh7m041fz2JchrvyQv8hmae+1n07HfBmvDLZRA=="],
+
+    "website": ["website@workspace:apps/website"],
+  }
+}
