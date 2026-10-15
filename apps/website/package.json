@@ -1,0 +1,10 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html styles.css main.js dist/ && echo website > dist/.built",
+    "dev": "npx serve -s . -l 3000",
+    "lint": "echo lint-ok"
+  }
+}

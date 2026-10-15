@@ -1,25 +1,3 @@
-[package]
-name = "rust-torch"
-version = "0.1.0"
-edition = "2021"
-description = "rusTorch — a PyTorch-like deep learning + LLM library in pure Rust"
-license = "MIT"
-keywords = ["deep-learning", "llm", "tensor", "autograd", "transformer"]
-categories = ["science"]
-
-[lib]
-name = "rust_torch"
-path = "src/lib.rs"
-
-[dependencies]
-rand = "0.8"
-
-[dev-dependencies]
-
-[[example]]
-name = "train_gpt"
-path = "examples/train_gpt.rs"
-
-[[example]]
-name = "sample"
-path = "examples/sample.rs"
+[workspace]
+members = ["crates/rust-torch"]
+resolver = "2"
